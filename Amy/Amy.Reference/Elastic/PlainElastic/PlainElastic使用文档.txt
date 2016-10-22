@@ -1,0 +1,4 @@
+1、使用PlainElastic实现全文搜索需要引用PlainElastic.Net.dll、Newtonsoft.Json.dll
+
+   注意：如果当前项目中的Newtonsoft.Json.dll版本与PlainElastic中的版本不一致，可打开源代码更新Newtonsoft.Json.dll，然后再引用这两个dll
+	

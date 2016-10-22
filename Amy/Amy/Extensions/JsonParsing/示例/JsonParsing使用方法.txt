@@ -1,0 +1,66 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.Serialization;
+using System.Text;
+
+namespace HGL.App
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            var student = new Student()
+            {
+                Name = "杨昆",
+                Age = 28,
+                Grade = new string[] { "高中", "大学" },
+                Signature = new Signature()
+                {
+                    Content = "好好学习，天天向上",
+                    DateTime = DateTime.Now,
+                },
+            };
+            Console.WriteLine(student.ToJsonByJsonNet());
+
+            //注1：使用ToObjectByDataContract时，时间格式使用\"/Date(1384957913323+0800)/\"
+            //注2：使用ToObjectByJavaScript时，时间格式使用\"2013-11-20\"
+            //注2：使用ToObjectByJsonNet时，无需注意时间格式
+            //var jsonData = "{\"Age\":28,\"Grade\":[\"高中\",\"大学\"],\"Name\":\"杨昆\",\"Signature\":{\"Content\":\"好好学习，天天向上\",\"DateTime\":\"2013-11-20\"}}";
+            //var model = jsonData.ToObjectByJsonNet<Student>();
+            //Console.WriteLine(model.ToJsonByJsonNet());
+        }
+    }
+
+    [DataContract] 
+    public class Student
+    {
+        [DataMember(Order = 0, IsRequired = true)]
+        public string Name { get; set; }
+        [DataMember(Order = 1)] 
+        public int Age { get; set; }
+        [DataMember(Order = 2)] 
+        public string[] Grade { get; set; }
+        [DataMember(Order = 3)] 
+        public Signature Signature { get; set; }
+    }
+
+    public class Signature
+    {
+        public string Content { get; set; }
+        public DateTime DateTime { get; set; }
+    }
+}
+
+
+/****************************************************************************************JsonHelper帮助文档***********************************************************************************************************************************************
+ * 帮助文档连接：http://blog.csdn.net/gaofang2009/article/details/6073029
+ * 
+ *          主要类                         命名空间                                引用                   限制            内建LINQ支持                                             时间字段                                                    编码
+ * DataContractJsonSerializer   System.Runtime.Serialization.Json        System.Runtime.Serialization    通用                 否          ToJson后格式："\/Date(1384957913323+0800)\/"，ToObject时格式："/Date(1384957913323+0800)/"    与其他Json编码不相同  
+ * 
+ * JavaScriptSerializer         System.Web.Script.Serialization          System.Web.Extensions.dll  只能在Web环境使用          否               ToJson后格式："\/Date(1384957913323+0800)\/"，ToObject时格式："2013-11-20"                     相同
+ * 
+ * JsonConvert、JArray等        Newtonsoft.Json                                                          通用                 是                                       无需注意时间格式，两种格式都可以转换                                     相同
+ * 
+ **********************************************************************************************************************************************************************************************************************************************************/

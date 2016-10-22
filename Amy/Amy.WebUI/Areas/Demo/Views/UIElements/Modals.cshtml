@@ -1,0 +1,67 @@
+﻿
+@{
+    ViewBag.Title = "Models";
+    Layout = "~/Areas/Demo/Views/Shared/_Layout.cshtml";
+}
+
+<!-- 面包屑 start -->
+<div class="page-title-breadcrumb">
+    <ol class="breadcrumb page-breadcrumb pull-left">
+        <li><i class="fa fa-home"></i>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/admin/manager">工作台</a>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+        <li><a href="javascript:void(0);">UIElements</a>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+        <li class="active">@ViewBag.Title</li>
+    </ol>
+    <div class="clearfix"></div>
+</div>
+<!-- 面包屑 end -->
+
+<!-- 页面内容 start -->
+<div class="page-content">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-white">
+                <div class="panel-heading">Amy弹框</div>
+                <div class="panel-body">
+                    <div class="demo-btn">
+                        <button type="button" class="btn btn-info btn-outlined js-alert">Alert</button>
+                        <button type="button" class="btn btn-primary btn-outlined js-confirm">Confirm</button>
+                        <button type="button" class="btn btn-success btn-outlined js-modal">Modal</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 页面内容 end -->
+
+@section scripts{
+    <script type="text/javascript">
+        $(function () {
+            $('.js-alert').on('click', function () {
+                amy.alert('亲，这是一个提示弹框！', function () {
+                    alert('你点击了确定按钮');
+                })
+            })
+
+            $('.js-confirm').on('click', function () {
+                amy.confirm('亲，这是一个确定弹框！', function () {
+                    alert('你点击了确定按钮');
+                })
+            })
+
+            $('.js-modal').on('click', function () {
+                amy.modal('/demo/uielements/editmodal', {}, function (data, res) {
+                    if (!res.Flag) {
+                        amy.alert(res.Content[0][1]);
+                    }
+                    else {
+                        amy.alert(res.Content, function () {
+                            location.href = '/';
+                        });
+                    }
+                })
+            })
+        })
+    </script>
+}
+

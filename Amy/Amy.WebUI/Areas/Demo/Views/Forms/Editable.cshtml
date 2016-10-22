@@ -1,0 +1,183 @@
+﻿
+@{
+    ViewBag.Title = "X-Editable";
+    Layout = "~/Areas/Demo/Views/Shared/_Layout.cshtml";
+}
+
+<!-- 面包屑 start -->
+<div class="page-title-breadcrumb">
+    <ol class="breadcrumb page-breadcrumb pull-left">
+        <li><i class="fa fa-home"></i>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/admin/manager">工作台</a>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+        <li><a href="javascript:void(0);">Forms</a>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+        <li class="active">@ViewBag.Title</li>
+    </ol>
+    <div class="clearfix"></div>
+</div>
+<!-- 面包屑 end -->
+
+<!-- 页面内容 start -->
+<div class="page-content">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="portlet">
+                <div class="portlet-body">
+                    <h2 class="mtn">Settings</h2>
+                    <div class="mbm">
+                        <label class="mrxxl">
+                            <input id="autoopen" type="checkbox" style="vertical-align: baseline;" />&nbsp; auto-open next field
+                        </label>
+                        <label class="mrxxl">
+                            <input id="inline-editing" type="checkbox" style="vertical-align: baseline;" />&nbsp; Inline Editing
+                        </label><span class="mrm">Enable:</span>
+                        <div id="enable" data-on="success" data-off="danger" class="make-switch switch-small">
+                            <input type="checkbox" checked="checked" class="switch" />
+                        </div>
+                    </div>
+                    <table id="user" class="table table-bordered table-striped">
+                        <tbody>
+                            <tr>
+                                <td width="35%">Simple text field</td>
+                                <td width="65%">
+                                    <a id="username" href="javascript:void(0);" class="editable editable-click">江山如画</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Empty text field, required</td>
+                                <td>
+                                    <a id="firstname" href="javascript:void(0);" data-type="text" data-pk="1" data-title="请输入用户名称" data-placement="right" data-placeholder="Required" class="editable editable-click editable-empty">李大牛</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Select, local array, custom display</td>
+                                <td>
+                                    <a id="sex" href="javascript:void(0);" data-type="select" data-pk="1" data-title="请选择性别" data-value="1" style="color: gray;" class="editable editable-click"></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Select, remote array, no buttons</td>
+                                <td>
+                                    <a id="group" href="javascript:void(0);" data-type="select" data-pk="1" data-title="请选择类型" data-source="@Url.Action("GetData", "Forms", new { area = "Demo", type="group" })" data-value="0"  class="editable editable-click"></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Select, error while loading</td>
+                                <td>
+                                    <a id="status" href="javascript:void(0);" data-type="select" data-pk="1" data-title="请选择状态" data-source="@Url.Action("GetData", "Forms", new { area = "Demo", type="status" })" data-value="0" class="editable editable-click"></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Textarea, buttons below. Submit by<i>ctrl+enter</i>
+                                </td>
+                                <td>
+                                    <a id="comments" href="javascript:void(0);" data-type="textarea" data-pk="1" data-title="用户评论" data-placeholder="Your comments here..." class="editable editable-pre-wrapped editable-click">awesomeuser!</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 页面内容 end -->
+
+@section scripts{
+    <script type="text/javascript">
+        $.fn.editable.defaults.inputclass = 'form-control';
+        $.fn.editable.defaults.url = '@Url.Action("Save", "Forms", new { area = "Demo" })';
+
+        if (getURL('mode') == 'inline') {
+            $("#inline-editing").iCheck('check');
+            $.fn.editable.defaults.mode = 'inline';
+        } else {
+            $("#inline-editing").iCheck('uncheck');
+            $.fn.editable.defaults.mode = 'popup';
+        }
+
+        $('#username').editable({
+            placement: 'right',
+            url: '@Url.Action("Save", "Forms", new { area = "Demo" })',
+            type: 'text',
+            pk: 1,
+            name: 'username',
+            title: '请输入用户名称'
+        });
+
+        $('#firstname').editable({
+            url: '@Url.Action("Save", "Forms", new { area = "Demo" })',
+            validate: function (value) {
+                if (!$.trim(value)) return '输入项为必填项，请输入正确的数据！';
+            }
+        });
+
+        $('#sex').editable({
+            prepend: "请选择",
+            url: '@Url.Action("Save", "Forms", new { area = "Demo" })',
+            source: [
+                { value: 1, text: '男' },
+                { value: 2, text: '女' }
+            ],
+            display: function (value, sourceData) {
+                var colors = { "": "gray", 1: "green", 2: "blue" },
+                    elem = $.grep(sourceData, function (o) { return o.value == value; });
+
+                if (elem.length) {
+                    $(this).text(elem[0].text).css("color", colors[value]);
+                } else {
+                    $(this).empty();
+                }
+            }
+        });
+
+        $('#group').editable({
+            url: '@Url.Action("Save", "Forms", new { area = "Demo" })',
+            showbuttons: false
+        });
+
+        $('#status').editable();
+
+        $('#comments').editable({
+            url: '@Url.Action("Save", "Forms", new { area = "Demo" })',
+            showbuttons: 'bottom'
+        });
+
+        $('#user .editable').on('hidden', function (e, reason) {
+            if (reason === 'save' || reason === 'nochange') {
+                var $next = $(this).closest('tr').next().find('.editable');
+                if ($('#autoopen').is(':checked')) {
+                    setTimeout(function () {
+                        $next.editable('show');
+                    }, 300);
+                } else {
+                    $next.focus();
+                }
+            }
+        });
+
+        $('#inline-editing').on('ifChecked ifUnchecked', function (event) {
+            if (event.type == 'ifChecked') {
+                window.location.href = '/demo/forms/editable?mode=inline';
+            } else {
+                window.location.href = '/demo/forms/editable';
+            }
+        });
+
+        $('#enable').on('switch-change', function () {
+            $('#user .editable').editable('toggleDisabled');
+        });
+
+        function getURL(name) {
+            var searchString = window.location.search.substring(1),
+                i, val, params = searchString.split("&");
+            for (i = 0; i < params.length; i++) {
+                val = params[i].split("=");
+                if (val[0] == name) {
+                    return unescape(val[1]);
+                }
+            }
+            return null;
+        }
+    </script>
+}
+

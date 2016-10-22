@@ -1,0 +1,208 @@
+﻿
+@{
+    ViewBag.Title = "Basic";
+    Layout = "~/Areas/Demo/Views/Shared/_Layout.cshtml";
+}
+
+<!-- 面包屑 start -->
+<div class="page-title-breadcrumb">
+    <ol class="breadcrumb page-breadcrumb pull-left">
+        <li><i class="fa fa-home"></i>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/admin/manager">工作台</a>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+        <li><a href="javascript:void(0);">Forms</a>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+        <li class="active">@ViewBag.Title</li>
+    </ol>
+    <div class="clearfix"></div>
+</div>
+<!-- 面包屑 end -->
+
+<!-- 页面内容 start -->
+<div class="page-content">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-yellow">
+                <div class="panel-heading">Form Basic</div>
+                <div class="panel-body pan">
+                    <form id="amy-form" action="@Url.Action("Save", "Forms", new { area="Demo" })" method="post" class="form-horizontal">
+                        <div class="form-body pal">
+                            <div class="form-group">
+                                <label for="code" class="col-md-3 control-label">学生编号：</label>
+                                <div class="col-md-6">
+                                    <input type="text" name="code" placeholder="学生编号" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="code" class="col-md-3 control-label">学生编号：</label>
+                                <div class="col-md-6">
+                                    <div class="input-icon">
+                                        <i class="fa fa-user"></i>
+                                        <input type="text" name="code" placeholder="学生编号" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="code" class="col-md-3 control-label">学生编号：</label>
+                                <div class="col-md-6">
+                                    <div class="input-icon right">
+                                        <i class="fa fa-user"></i>
+                                        <input type="text" name="code" placeholder="学生编号" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="code" class="col-md-3 control-label">学生编号：</label>
+                                <div class="col-md-6">
+                                    <select class="select2 input-medium" data-value="1">
+                                        <option>请选择班级</option>
+                                        <option value="1">高三一班</option>
+                                        <option value="2">高三二班</option>
+                                        <option value="3">高三三班</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="code" class="col-md-3 control-label">学生编号：</label>
+                                <div class="col-md-6">
+                                    <label class="radio-inline">
+                                        <input type="radio" name="IsEnabled" value="1" data-value="1" />&nbsp; 启用
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="IsEnabled" value="0" data-value="1" />&nbsp; 禁用
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="code" class="col-md-3 control-label">学生编号：</label>
+                                <div class="col-md-6">
+                                    <label class="radio-inline">
+                                        <input type="checkbox" name="hobby" value="1" data-value="1" />&nbsp; 篮球
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="checkbox" name="hobby" value="0" data-value="1" />&nbsp; 足球
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="code" class="col-md-3 control-label">学生编号：</label>
+                                <div class="col-md-6">
+                                    <div class="input-group datetimepicker-default date">
+                                        <input type="text" name="datetime" class="form-control" /><span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="code" class="col-md-3 control-label">学生编号：</label>
+                                <div class="col-md-6">
+                                    <div class="input-group datetimepicker-disable-date date">
+                                        <input type="text" name="time" class="form-control" /><span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="code" class="col-md-3 control-label">学生编号：</label>
+                                <div class="col-md-6">
+                                    <div class="input-group datetimepicker-disable-time date">
+                                        <input type="text" name="date" class="form-control" /><span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="code" class="col-md-3 control-label">学生编号：</label>
+                                <div class="col-md-6">
+                                    <div class="input-group datetimepicker-start date">
+                                        <input type="text" name="datetime_event_start" class="form-control" /><span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="code" class="col-md-3 control-label">学生编号：</label>
+                                <div class="col-md-6">
+                                    <div class="input-group datetimepicker-end date">
+                                        <input type="text" name="datetime_event_end" class="form-control" /><span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="code" class="col-md-3 control-label">学生编号：</label>
+                                <div class="col-md-6">
+                                    <textarea name="code" class="form-control" style="height:100px;color:#999999"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="code" class="col-md-3 control-label">展示图片：</label>
+                                <div class="col-md-6">
+                                    <p><img id="preview" src="/content/mgr/images/gallery/data/img02.png" style="width:168px;height:126px;" /></p>
+                                    <button type="button" class="btn btn-primary" onclick="upImage();">上传</button>
+                                    <input id="picture" name="DisplayPic" type="hidden" value="" />
+                                    <script type="text/plain" id="upload_ue">
+                                    </script>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">商品详情：</label>
+                                <div class="col-md-6">
+                                    <script id="editor" type="text/plain" style="height: 400px;">
+                                    </script>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <div class="col-md-offset-3 col-md-9">
+                                <a href="javascript:history.back(-1)" class="btn btn-green">返回</a>&nbsp;
+                                <button class="btn btn-primary" type="submit">保存</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 页面内容 end -->
+
+@section scripts{
+    <script type="text/javascript">
+        var _editor = UE.getEditor('upload_ue');
+        _editor.ready(function () {
+            //隐藏编辑器，因为不会用到这个编辑器实例，所以要隐藏
+            _editor.hide();
+            //侦听图片上传
+            _editor.addListener('beforeInsertImage', function (t, arg) {
+                //将地址赋值给相应的input,只去第一张图片的路径
+                $("#picture").attr("value", arg[0].src);
+                //图片预览
+                $("#preview").attr("src", arg[0].src);
+            })
+        });
+        //弹出图片上传的对话框
+        function upImage() {
+            var myImage = _editor.getDialog("insertimage");
+            myImage.open();
+        }
+
+        var ue = UE.getEditor('editor');
+
+        ue.addListener("ready", function () {
+            // editor准备好之后才可以使用
+            ue.setContent('@Html.Raw("这是一个很好的小时代~")');
+        });
+
+        $('#amy-form').myValidate(function (form) {
+            $(form).ajaxSubmit({
+                data: { 'Content': ue.getContent() },
+                success: function (res) {
+                    if (res.Flag) {
+                        amy.alert(res.Content);
+                    }
+                    else {
+                        amy.alert(res.Content[0][1]);
+                    }
+                },
+                error: function () {
+
+                },
+                dataType: "json"
+            })
+        });
+    </script>
+}
+

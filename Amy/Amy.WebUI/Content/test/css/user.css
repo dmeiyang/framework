@@ -1,0 +1,141 @@
+@charset "utf-8";
+
+/*container-item*/
+.container-item{width:100%;line-height:24px;padding:27px 0;border-bottom:1px solid #f5f5f5;float:left;}
+.container-item ul li{line-height:24px;float:left;font-size:20px;padding-right:32px;margin-right:32px;border-right:1px solid #dbdbdb;}
+.container-item ul li:last-child{padding-right:0;margin-right:0;border-right:none;}
+.container-item ul li a{color:#666;text-decoration:none;}
+.container-item ul li.onclick a{color:#0677df;}
+
+
+/*我的收藏*/
+#mycollection{}
+#mycollection li{padding:5px 0 15px;border-bottom:1px solid #ebeaea;width:100%;position:relative;}
+#mycollection li .publishTime{width:100%;line-height:40px;text-indent:25px;font-size:14px;color:#999;background:url(../images/star.png) no-repeat 0 13px;}
+#mycollection li .subject{width:100%;}
+
+
+#mycollection li .subject > a {
+    display: block;
+    float: left;
+    height:155px;
+    margin-right: 24px;
+    position: relative;
+    width: 232px;
+    z-index: 99;
+}
+#mycollection li .subject > a > img {
+    display: block;
+    float: left;
+    height:155px;
+    margin-right: 24px;
+    width:232px;
+}
+#mycollection li .subject .article-item {
+    height:131px;
+    overflow:hidden;
+}
+#mycollection li .subject .article-item h3 a {
+    display:block;
+    font-size: 20px;
+    line-height:36px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width:518px;
+    color:#252525;
+    text-decoration:none;
+}
+#mycollection li .subject .article-item h3 a:hover {
+    color: #0677df;
+}
+#mycollection li .subject .article-item .abstract {
+    overflow: hidden;
+    max-height:78px;
+}
+#mycollection li .subject .article-item .abstract a {
+    color: #595959;
+    display:block;
+    font-size: 14px;
+    overflow: hidden;
+    line-height:26px;
+    text-decoration:none;
+}
+#mycollection li .subject .article-item .abstract a:hover {
+    color: #0677df;
+}
+#mycollection li .subject .article-item .hottag.nophoto {
+    display: inline-block;
+    float: left;
+    margin-right: 12px;
+    position: relative;
+}
+#mycollection li .subject .article-info {
+    color: #bbb;
+    font-size: 14px;
+    line-height:22px;
+}
+#mycollection li .subject .article-info img{
+	margin-left:25px;
+	margin-right:5px;
+	margin-bottom:-2px;
+}
+#mycollection li .delete-btn {
+	width:20px;
+    height: 21px;
+    right: 4px;
+    bottom: 18px;
+    position: absolute;
+    cursor:pointer;
+}
+
+
+
+/*我的订阅*/
+#mysubscribe{width:808px;margin:0 auto;}
+#mysubscribe li{width:172px;height:172px;padding:0 15px;border-bottom:1px solid #f5f5f5;float:left;text-align:center;position:relative;margin-top:28px;}
+#mysubscribe li>a{width:172px;height:129px;display:block;}
+#mysubscribe li .column-img{width:172px;height:129px;display:block;}
+#mysubscribe li h3 a{color:#666;font-size:16px;line-height:45px;}
+#mysubscribe li h3 a:hover{color:#0677df;}
+#mysubscribe li .delete-btn{width:30px;height:29px;cursor:pointer;position:absolute;top:0;right:15px;z-index:99;}
+
+
+
+/*我的关注*/
+#myfollow{margin:20px auto;float:left;}
+#myfollow li{width:364px;height:74px;float:left;padding:30px 20px 15px;position:relative;}
+#myfollow li .user-portrait{width:74px;height:74px;float:left;border-radius:100%;-webkit-border-radius:100%;-moz-border-radius:100%;margin-right:20px;}
+#myfollow li .userinfo{}
+#myfollow li .userinfo h3{font-size:18px;line-height:24px;margin-bottom:8px;}
+#myfollow li .userinfo h3 a{color:#333;line-height:24px;}
+#myfollow li .userinfo h3 a:hover{color:#e62129;}
+#myfollow li .userinfo p{line-height:21px;height:42px;overflow:hidden;font-size:14px;color:#888;width:210px;}
+#myfollow li .delete-btn{position:absolute;width:20px;height:21px;cursor:pointer;right:20px;top:54px;}
+#myfollow li.listleft{border-right:1px dashed #e5e5e5;}
+#myfollow li:first-child{margin-top:15px;padding-top:15px;}
+#myfollow li:first-child .delete-btn{top:39px;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

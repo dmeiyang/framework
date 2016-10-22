@@ -1,0 +1,13 @@
+使用memcached-1.2.1版本的时候，需要添加引用
+
+Commons.dll
+ICSharpCode.SharpZipLib.dll
+Memcached.ClientLibrary.dll
+log4net.dll
+
+变更记录
+Memcached.ClientLibrary.dll更新了log4net版本，升级为1.2.11.0
+
+使用memcached-1.4.4版本的时候，需要添加引用
+
+Enyim.Caching.dll

@@ -1,0 +1,557 @@
+﻿
+@{
+    ViewBag.Title = "FormLayouts";
+    Layout = "~/Areas/Demo/Views/Shared/_Layout.cshtml";
+}
+
+<!-- 面包屑 start -->
+<div class="page-title-breadcrumb">
+    <ol class="breadcrumb page-breadcrumb pull-left">
+        <li><i class="fa fa-home"></i>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/admin/manager">工作台</a>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+        <li><a href="javascript:void(0);">Forms</a>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+        <li class="active">@ViewBag.Title</li>
+    </ol>
+    <div class="clearfix"></div>
+</div>
+<!-- 面包屑 end -->
+
+<!-- 页面内容 start -->
+<div class="page-content">
+    <div id="form-layouts" class="row">
+        <div class="col-lg-12">
+            <div class="note note-info">
+                <h4 class="box-heading">Responsive tab</h4>
+                <p>Please resize browser to see tab version on Tablet & Mobile</p>
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <ul class="nav ul-edit nav-tabs responsive">
+                <li class="active">
+                    <a href="#tab-form-actions" data-toggle="tab">Form Actions</a>
+                </li>
+                <li>
+                    <a href="#tab-two-columns" data-toggle="tab">2 Columns</a>
+                </li>
+                <li>
+                    <a href="#tab-form-seperated" data-toggle="tab">Bootstrap Switch</a>
+                </li>
+            </ul>
+            <div style="background: transparent; border: 0; box-shadow: none !important" class="tab-content pan mtl mbn responsive">
+                <div id="tab-form-actions" class="tab-pane fade active in">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="panel panel-violet">
+                                <div class="panel-heading">Form Actions On Top</div>
+                                <div class="panel-body pan">
+                                    <form id="amy-form" action="@Url.Action("Save", "Forms", new { area="Demo" })" method="post" class="form-horizontal">
+                                        <div class="form-actions top">
+                                            <div class="col-md-offset-3 col-md-9">
+                                                <a href="javascript:history.back(-1)" class="btn btn-green">返回</a>&nbsp;
+                                                <button class="btn btn-primary" type="submit">保存</button>
+                                            </div>
+                                        </div>
+                                        <div class="form-body pal">
+                                            <div class="form-group">
+                                                <label for="username" class="col-md-3 control-label">
+                                                    姓名<span class='require'>*</span>
+                                                </label>
+                                                <div class="col-md-9">
+                                                    <div class="input-icon">
+                                                        <i class="fa fa-user"></i>
+                                                        <input type="text" name="username" placeholder="Username" class="form-control required" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="email" class="col-md-3 control-label">
+                                                    邮箱<span class='require'>*</span>
+                                                </label>
+                                                <div class="col-md-9">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                                                        <input type="text" name="email" placeholder="Email Address" class="form-control required" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="address" class="col-md-3 control-label">
+                                                    地址<span class='require'>*</span>
+                                                </label>
+                                                <div class="col-md-9">
+                                                    <div class="input-icon right">
+                                                        <i class="fa fa-location-arrow"></i>
+                                                        <input type="text" name="address" placeholder="Address" class="form-control required" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group mbn">
+                                                <label for="description" class="col-md-3 control-label">描述</label>
+                                                <div class="col-md-9">
+                                                    <textarea name="description" rows="3" class="form-control"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="panel panel-green">
+                                <div class="panel-heading">Form Actions On Bottom</div>
+                                <div class="panel-body pan">
+                                    <form id="amy-form2" action="@Url.Action("Save", "Forms", new { area="Demo" })" method="post" class="form-horizontal">
+                                        <div class="form-body pal">
+                                            <div class="form-group">
+                                                <label for="username" class="col-md-3 control-label">
+                                                    姓名<span class='require'>*</span>
+                                                </label>
+                                                <div class="col-md-9">
+                                                    <div class="input-icon">
+                                                        <i class="fa fa-user"></i>
+                                                        <input type="text" name="username" placeholder="Username" class="form-control required" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="email" class="col-md-3 control-label">
+                                                    邮箱<span class='require'>*</span>
+                                                </label>
+                                                <div class="col-md-9">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                                                        <input type="text" name="email" placeholder="Email Address" class="form-control required" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="address" class="col-md-3 control-label">
+                                                    地址<span class='require'>*</span>
+                                                </label>
+                                                <div class="col-md-9">
+                                                    <div class="input-icon right">
+                                                        <i class="fa fa-location-arrow"></i>
+                                                        <input type="text" name="address" placeholder="Address" class="form-control required" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group mbn">
+                                                <label for="description" class="col-md-3 control-label">描述</label>
+                                                <div class="col-md-9">
+                                                    <textarea name="description" rows="3" class="form-control"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-actions">
+                                            <div class="col-md-offset-3 col-md-9">
+                                                <a href="javascript:history.back(-1)" class="btn btn-green">返回</a>&nbsp;
+                                                <button class="btn btn-primary" type="submit">保存</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="panel panel-yellow">
+                                <div class="panel-heading">Left Aligned</div>
+                                <div class="panel-body pan">
+                                    <form id="amy-form3" action="@Url.Action("Save", "Forms", new { area="Demo" })" method="post">
+                                        <div class="form-actions top pll prl">
+                                            <a href="javascript:history.back(-1)" class="btn btn-green">返回</a>&nbsp;
+                                            <button class="btn btn-primary" type="submit">保存</button>
+                                        </div>
+                                        <div class="form-body pal">
+                                            <div class="form-group">
+                                                <label for="username" class="control-label">
+                                                    姓名<span class='require'>*</span>
+                                                </label>
+                                                <div class="input-icon">
+                                                    <i class="fa fa-user"></i>
+                                                    <input type="text" name="username" placeholder="Username" class="form-control required" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="email" class="control-label">
+                                                    邮箱<span class='require'>*</span>
+                                                </label>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                                                    <input type="text" name="email" placeholder="Email Address" class="form-control required" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="address" class="control-label">
+                                                    地址<span class='require'>*</span>
+                                                </label>
+                                                <div class="input-icon right">
+                                                    <i class="fa fa-location-arrow"></i>
+                                                    <input type="text" name="address" placeholder="Address" class="form-control required" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group mbn">
+                                                <label for="description" class="control-label">描述</label>
+                                                <textarea name="description" rows="3" class="form-control"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-actions pll prl">
+                                            <a href="javascript:history.back(-1)" class="btn btn-green">返回</a>&nbsp;
+                                            <button class="btn btn-primary" type="submit">保存</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="panel panel-orange">
+                                <div class="panel-heading">Right Aligned</div>
+                                <div class="panel-body pan">
+                                    <form id="amy-form4" action="@Url.Action("Save", "Forms", new { area="Demo" })" method="post">
+                                        <div class="form-actions top text-right pll prl">
+                                            <a href="javascript:history.back(-1)" class="btn btn-green">返回</a>&nbsp;
+                                            <button class="btn btn-primary" type="submit">保存</button>
+                                        </div>
+                                        <div class="form-body pal">
+                                            <div class="form-group">
+                                                <label for="username" class="control-label">
+                                                    姓名<span class='require'>*</span>
+                                                </label>
+                                                <div class="input-icon">
+                                                    <i class="fa fa-user"></i>
+                                                    <input type="text" name="username" placeholder="Username" class="form-control required" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="email" class="control-label">
+                                                    邮箱<span class='require'>*</span>
+                                                </label>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                                                    <input type="text" name="email" placeholder="Email Address" class="form-control required" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="address" class="control-label">
+                                                    地址<span class='require'>*</span>
+                                                </label>
+                                                <div class="input-icon right">
+                                                    <i class="fa fa-location-arrow"></i>
+                                                    <input type="text" name="address" placeholder="Address" class="form-control required" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group mbn">
+                                                <label for="description" class="control-label">描述</label>
+                                                <textarea name="description" rows="3" class="form-control"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-actions text-right pll prl">
+                                            <a href="javascript:history.back(-1)" class="btn btn-green">返回</a>&nbsp;
+                                            <button class="btn btn-primary" type="submit">保存</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="tab-two-columns" class="tab-pane fade">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="panel panel-yellow">
+                                <div class="panel-heading">Form 2 Columns Default </div>
+                                <div class="panel-body pan">
+                                    <form id="amy-form5" action="@Url.Action("Save", "Forms", new { area="Demo" })" method="post" class="horizontal-form">
+                                        <div class="form-body pal">
+                                            <h3>基本信息</h3><hr />
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group has-success">
+                                                        <label for="username" class="control-label">
+                                                            姓名<span class='require'>*</span>
+                                                        </label>
+                                                        <div class="input-icon right">
+                                                            <i class="fa fa-user"></i>
+                                                            <input type="text" name="username" placeholder="Username" class="form-control required" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group has-error">
+                                                        <label for="address" class="control-label">
+                                                            地址<span class='require'>*</span>
+                                                        </label>
+                                                        <div class="input-icon right">
+                                                            <i class="fa fa-location-arrow"></i>
+                                                            <input type="text" name="address" placeholder="Address" class="form-control required" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <h3>补充信息</h3><hr />
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label for="description" class="control-label">描述</label>
+                                                        <textarea name="description" rows="3" class="form-control"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-actions text-right pll prl">
+                                            <a href="javascript:history.back(-1)" class="btn btn-green">返回</a>&nbsp;
+                                            <button class="btn btn-primary" type="submit">保存</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="panel panel-yellow">
+                                <div class="panel-heading">Form 2 Columns Readonly</div>
+                                <div class="panel-body pan">
+                                    <form action="javascript:void(0);" class="form-horizontal">
+                                        <div class="form-body pal">
+                                            <h3>基本信息</h3><hr />
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="username" class="col-md-3 control-label">姓名：</label>
+                                                        <div class="col-md-9">
+                                                            <p class="form-control-static">John</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="address" class="col-md-3 control-label">地址：</label>
+                                                        <div class="col-md-9">
+                                                            <p class="form-control-static">郑州经七路红旗路中亨大厦913</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <h3>补充信息</h3><hr />
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label for="address" class="col-md-3 control-label">描述：</label>
+                                                        <div class="col-md-9">
+                                                            <p class="form-control-static">
+                                                                这是一个描述，<a href="mailto:whisfat1935@jourrapide.com">whisfat1935@jourrapide.com</a>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-actions text-right pal">
+                                            <button type="button" class="btn btn-primary">Edit</button>&nbsp;
+                                            <button type="button" class="btn btn-green">Cancel</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="tab-form-seperated" class="tab-pane fade">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="panel panel-yellow">
+                                <div class="panel-heading">Bootstrap Switch</div>
+                                <div class="panel-body pan">
+                                    <form id="amy-form6" action="@Url.Action("Save", "Forms", new { area="Demo" })" method="post" class="form-horizontal form-seperated">
+                                        <div class="form-body">
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">Colors</label>
+                                                <div class="col-md-9">
+                                                    <div id="mySwitch" data-on="primary" data-off="info" class="make-switch">
+                                                        <input type="checkbox" checked="checked" class="switch" />
+                                                    </div>&nbsp;
+                                                    <div data-on="info" data-off="success" class="make-switch">
+                                                        <input type="checkbox" checked="checked" class="switch" />
+                                                    </div>&nbsp;
+                                                    <div data-on="success" data-off="warning" class="make-switch">
+                                                        <input type="checkbox" checked="checked" class="switch" />
+                                                    </div>&nbsp;
+                                                    <div data-on="warning" data-off="danger" class="make-switch">
+                                                        <input type="checkbox" checked="checked" class="switch" />
+                                                    </div>&nbsp;
+                                                    <div data-on="danger" data-off="default" class="make-switch mts">
+                                                        <input type="checkbox" checked="checked" class="switch" />
+                                                    </div>&nbsp;
+                                                    <div data-on="default" data-off="primary" class="make-switch mts">
+                                                        <input type="checkbox" checked="checked" class="switch" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">Size</label>
+                                                <div class="col-md-9">
+                                                    <div class="make-switch switch-large">
+                                                        <input type="checkbox" checked="checked" class="switch" />
+                                                    </div>&nbsp;
+                                                    <div class="make-switch">
+                                                        <input type="checkbox" checked="checked" class="switch" />
+                                                    </div>&nbsp;
+                                                    <div class="make-switch switch-small">
+                                                        <input type="checkbox" checked="checked" class="switch" />
+                                                    </div>&nbsp;
+                                                    <div class="make-switch switch-mini">
+                                                        <input type="checkbox" checked="checked" class="switch" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">Disabled</label>
+                                                <div class="col-md-9">
+                                                    <div data-on="primary" class="make-switch">
+                                                        <input type="checkbox" checked="checked" disabled="disabled" class="switch" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">Icons</label>
+                                                <div class="col-md-9">
+                                                    <div data-on-label="&lt;i class=&quot;fa fa-microphone&quot;&gt;&lt;/i&gt;" data-off-label="&lt;i class=&quot;fa fa-power-off&quot;&gt;&lt;/i&gt;" class="make-switch">
+                                                        <input type="checkbox" checked="checked" class="switch" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-actions">
+                                            <div class="col-md-offset-3 col-md-9">
+                                                <a href="javascript:history.back(-1)" class="btn btn-green">返回</a>&nbsp;
+                                                <button class="btn btn-primary" type="submit">保存</button>
+                                            </div>
+                                        </div>
+                                        @*<div class="form-actions text-right pal">
+                                            <a href="javascript:history.back(-1)" class="btn btn-green">返回</a>&nbsp;
+                                            <button class="btn btn-primary" type="submit">保存</button>
+                                        </div>*@
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 页面内容 end -->
+
+@section scripts{
+    <script type="text/javascript">
+        $('#mySwitch').on('switch-change', function (e, data) {
+            var $el = $(data.el)
+              , value = data.value;
+            console.log(e, $el, value);
+        });
+
+        $('#amy-form').myValidate(function (form) {
+            $(form).ajaxSubmit({
+                success: function (res) {
+                    if (res.Flag) {
+                        amy.alert(res.Content);
+                    }
+                    else {
+                        amy.alert(res.Content[0][1]);
+                    }
+                },
+                error: function () {
+
+                },
+                dataType: "json"
+            })
+        });
+
+        $('#amy-form2').myValidate(function (form) {
+            $(form).ajaxSubmit({
+                success: function (res) {
+                    if (res.Flag) {
+                        amy.alert(res.Content);
+                    }
+                    else {
+                        amy.alert(res.Content[0][1]);
+                    }
+                },
+                error: function () {
+
+                },
+                dataType: "json"
+            })
+        });
+
+        $('#amy-form3').myValidate(function (form) {
+            $(form).ajaxSubmit({
+                success: function (res) {
+                    if (res.Flag) {
+                        amy.alert(res.Content);
+                    }
+                    else {
+                        amy.alert(res.Content[0][1]);
+                    }
+                },
+                error: function () {
+
+                },
+                dataType: "json"
+            })
+        });
+
+        $('#amy-form4').myValidate(function (form) {
+            $(form).ajaxSubmit({
+                success: function (res) {
+                    if (res.Flag) {
+                        amy.alert(res.Content);
+                    }
+                    else {
+                        amy.alert(res.Content[0][1]);
+                    }
+                },
+                error: function () {
+
+                },
+                dataType: "json"
+            })
+        });
+
+        $('#amy-form5').myValidate(function (form) {
+            $(form).ajaxSubmit({
+                success: function (res) {
+                    if (res.Flag) {
+                        amy.alert(res.Content);
+                    }
+                    else {
+                        amy.alert(res.Content[0][1]);
+                    }
+                },
+                error: function () {
+
+                },
+                dataType: "json"
+            })
+        });
+
+        $('#amy-form6').myValidate(function (form) {
+            $(form).ajaxSubmit({
+                success: function (res) {
+                    if (res.Flag) {
+                        amy.alert(res.Content);
+                    }
+                    else {
+                        amy.alert(res.Content[0][1]);
+                    }
+                },
+                error: function () {
+
+                },
+                dataType: "json"
+            })
+        });
+    </script>
+}
+

@@ -1,0 +1,136 @@
+﻿@model Amy.WebUI.Areas.Admin.Models.Article
+@{
+    Layout = null;
+}
+
+<div class="modal-content">
+    <div class="modal-header">
+        <button class="close" aria-hidden="true" data-dismiss="modal" type="button">×</button>
+        <h4 class="modal-title" id="modal-login-label">@ViewBag.Title</h4>
+    </div>
+    <div class="modal-body">
+        <div class="form">
+            <form id="amy-form" method="post" action="@Url.Action("Save", "Elasticsearch", new { area="Admin" })" class="form-horizontal">
+                <div class="form-body pal">
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">标题</label>
+                        <div class="col-md-10">
+                            <input name="Id" type="hidden" value="@Model.Id" />
+                            <input type="text" name="Title" value="@Model.Title" class="form-control required" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">描述</label>
+                        <div class="col-md-10">
+                            <textarea name="Description" class="form-control">@Model.Description</textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">作者</label>
+                        <div class="col-md-10">
+                            <input type="text" name="Author" value="@Model.Author" class="form-control required" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">来源</label>
+                        <div class="col-md-10">
+                            <label class="radio-inline">
+                                <input type="checkbox" name="Sources" value="虎嗅网" data-value="@Model.Sources.ListToString(",")" />&nbsp; 虎嗅网
+                            </label>
+                            <label class="radio-inline">
+                                <input type="checkbox" name="Sources" value="创业邦" data-value="@Model.Sources.ListToString(",")" />&nbsp; 创业邦
+                            </label>
+                            <label class="radio-inline">
+                                <input type="checkbox" name="Sources" value="果壳网" data-value="@Model.Sources.ListToString(",")" />&nbsp; 果壳网
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">标签</label>
+                        <div class="col-md-10">
+                            <label class="radio-inline">
+                                <input type="checkbox" name="Tags" value="明星公司" data-value="@Model.Tags.ArrayToString(",")" />&nbsp; 明星公司
+                            </label>
+                            <label class="radio-inline">
+                                <input type="checkbox" name="Tags" value="早期项目" data-value="@Model.Tags.ArrayToString(",")" />&nbsp; 早期项目
+                            </label>
+                            <label class="radio-inline">
+                                <input type="checkbox" name="Tags" value="深度报道" data-value="@Model.Tags.ArrayToString(",")" />&nbsp; 深度报道
+                            </label>
+                            <label class="radio-inline">
+                                <input type="checkbox" name="Tags" value="行业研究" data-value="@Model.Tags.ArrayToString(",")" />&nbsp; 行业研究
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">是否启用</label>
+                        <div class="col-md-10">
+                            <label class="radio-inline">
+                                <input type="radio" name="IsDisplay" value="True" data-value="@Model.IsDisplay" />&nbsp; 启用
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="IsDisplay" value="False" data-value="@Model.IsDisplay" />&nbsp; 禁用
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-actions pal">
+                    <div class="form-group mbn">
+                        <div class="col-md-offset-2 col-md-6">
+                            <button type="submit" class="btn btn-primary sure">确定</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    //初始化表单checkbox
+    $('input[type="checkbox"]:not(".switch")').iCheck({
+        checkboxClass: 'icheckbox_minimal-grey',
+        increaseArea: '20%' // optional
+    }).each(function (n) {
+        var obj = $(this);
+
+        var array = '';
+
+        if (obj.attr('data-value')) {
+            array = ',' + obj.attr('data-value') + ',';
+        }
+
+        var cur = ',' + obj.val() + ',';
+
+        if (array.indexOf(cur) >= 0) {
+            obj.iCheck('check');
+        }
+    });
+
+    //初始化表单radio
+    $('#amy-form input[type="radio"]:not(".switch")').iCheck({
+        radioClass: 'iradio_minimal-grey',
+        increaseArea: '20%' // optional
+    }).each(function (n) {
+        var obj = $(this);
+
+        if (obj.val() == obj.attr('data-value')) {
+            obj.iCheck('check');
+        }
+    });
+
+    $('.js-select2').select2();
+
+    $('.js-select2').each(function (n) {
+        var obj = $(this);
+
+        var id = obj.attr('data-value');
+
+        if (id) {
+            obj.select2('val', id);
+        }
+        else {
+            obj.select2('val', '');
+        }
+    })
+</script>

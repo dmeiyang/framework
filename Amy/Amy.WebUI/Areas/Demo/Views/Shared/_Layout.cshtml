@@ -1,0 +1,113 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="cache-control" content="no-cache">
+    <title>@ViewBag.Title - 人生若只如初见</title>
+
+    <link href="/content/mgr/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+
+    @Styles.Render("~/content/manager/css")
+
+    <!-- 加载插件样式 -->
+    @RenderSection("styles", required: false)
+
+    @Styles.Render("~/content/manager/css/themes")
+</head>
+<body>
+    @Html.Action("PartialHeader", "Manager", new { area = "Admin" })
+
+    <div id="wrapper">
+        <!-- 左侧菜单 start -->
+        <nav id="sidebar" role="navigation" class="navbar-default navbar-static-side">
+            <div class="sidebar-collapse menu-scroll">
+                <ul id="side-menu" class="nav">
+                    <li class="user-panel">
+                        <div class="thumb">
+                            <img src="~/content/mgr/images/gallery/data/head_default.jpg" class="img-circle" />
+                        </div>
+                        <div class="info">
+                            <p>@HGLAuthorize.Account.ToDescription(6)</p>
+                            <ul class="list-inline list-unstyled">
+                                <li><a href="/admin/manager/basicinfo" title="基本信息"><i class="fa fa-user"></i></a></li>
+                                <li><a href="javascript:void(0);" title="邮件通知"><i class="fa fa-envelope"></i></a></li>
+                                <li><a href="javascript:void(0);" class="js-password" title="修改密码"><i class="fa fa-cog"></i></a></li>
+                                <li><a href="javascript:void(0);" class="js-exit" title="用户退出"><i class="fa fa-sign-out"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="clearfix"></div>
+                    </li>
+                    <li class="amy-menu-default">
+                        <a href="/admin/manager">
+                            <i class="fa fa-tachometer fa-fw">
+                                <div class="icon-bg bg-orange"></div>
+                            </i>
+                            <span class="menu-title">我的工作台</span>
+                        </a>
+                    </li>
+                    <li data-cookie="uielements">
+                        <a href="javascript:void(0);">
+                            <i class="fa fa-laptop fa-fw">
+                                <div class="icon-bg bg-pink"></div>
+                            </i>
+                            <span class="menu-title">UI Elements</span><span class="fa arrow"></span>
+                        </a>
+                        <ul class="nav nav-second-level">
+                            <li data-cookie="uielements-generals" class="amy-menu"><a href="/demo/uielements/generals"><i class="fa fa-rocket"></i><span class="submenu-title">Generals</span></a></li>
+                            <li data-cookie="uielements-buttons" class="amy-menu"><a href="/demo/uielements/buttons"><i class="fa fa-rocket"></i><span class="submenu-title">Buttons</span></a></li>
+                            <li data-cookie="uielements-progressbars" class="amy-menu"><a href="/demo/uielements/progressbars"><i class="fa fa-rocket"></i><span class="submenu-title">Progress Bars</span></a></li>
+                            <li data-cookie="uielements-modals" class="amy-menu"><a href="/demo/uielements/modals"><i class="fa fa-rocket"></i><span class="submenu-title">Modals</span></a></li>
+                            <li data-cookie="uielements-icons" class="amy-menu"><a href="/demo/uielements/icons"><i class="fa fa-rocket"></i><span class="submenu-title">Icons</span></a></li>
+                            <li data-cookie="uielements-panels" class="amy-menu"><a href="/demo/uielements/panels"><i class="fa fa-rocket"></i><span class="submenu-title">Panels</span></a></li>
+                        </ul>
+                    </li>
+                    <li data-cookie="uiadvanced">
+                        <a href="javascript:void(0);">
+                            <i class="fa fa-laptop fa-fw">
+                                <div class="icon-bg bg-pink"></div>
+                            </i>
+                            <span class="menu-title">UI Advanced</span><span class="fa arrow"></span>
+                        </a>
+                        <ul class="nav nav-second-level">
+                            <li data-cookie="uiadvanced-preloader" class="amy-menu"><a href="/demo/uiadvanced/preloader"><i class="fa fa-rocket"></i><span class="submenu-title">Preloader</span></a></li>
+                            <li data-cookie="uiadvanced-nestablelist" class="amy-menu"><a href="/demo/uiadvanced/nestablelist"><i class="fa fa-rocket"></i><span class="submenu-title">Nestable List</span></a></li>
+                            <li data-cookie="uiadvanced-dropdownlist" class="amy-menu"><a href="/demo/uiadvanced/dropdownlist"><i class="fa fa-rocket"></i><span class="submenu-title">Dropdown List</span></a></li>
+                            <li data-cookie="uiadvanced-notific" class="amy-menu"><a href="/demo/uiadvanced/notific"><i class="fa fa-rocket"></i><span class="submenu-title">Notific&Message</span></a></li>
+                            <li data-cookie="uiadvanced-toastr" class="amy-menu"><a href="/demo/uiadvanced/toastr"><i class="fa fa-rocket"></i><span class="submenu-title">Toastr Notifications</span></a></li>
+                        </ul>
+                    </li>
+                    <li data-cookie="forms">
+                        <a href="javascript:void(0);">
+                            <i class="fa fa-laptop fa-fw">
+                                <div class="icon-bg bg-pink"></div>
+                            </i>
+                            <span class="menu-title">Forms</span><span class="fa arrow"></span>
+                        </a>
+                        <ul class="nav nav-second-level">
+                            <li data-cookie="forms-layout" class="amy-menu"><a href="/demo/forms/layouts"><i class="fa fa-rocket"></i><span class="submenu-title">Form Layouts</span></a></li>
+                            <li data-cookie="forms-basic" class="amy-menu"><a href="/demo/forms/basic"><i class="fa fa-rocket"></i><span class="submenu-title">Form Basic</span></a></li>
+                            <li data-cookie="forms-validation" class="amy-menu"><a href="/demo/forms/validation"><i class="fa fa-rocket"></i><span class="submenu-title">Form Validation</span></a></li>
+                            <li data-cookie="forms-editable" class="amy-menu"><a href="/demo/forms/editable"><i class="fa fa-rocket"></i><span class="submenu-title">Form X-editable</span></a></li>
+                            <li data-cookie="forms-wizard" class="amy-menu"><a href="/demo/forms/wizard"><i class="fa fa-rocket"></i><span class="submenu-title">Form Wizard</span></a></li>
+                            <li data-cookie="forms-upload" class="amy-menu"><a href="/demo/forms/upload"><i class="fa fa-rocket"></i><span class="submenu-title">Multiple File Upload</span></a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <!-- 左侧菜单 end -->
+
+        <!-- 内容区域 start -->
+        <div id="page-wrapper">
+            @RenderBody()
+        </div>
+        <!-- 内容区域 end -->
+    </div>
+
+    @Html.Action("PartialFooter", "Manager", new { area = "Admin" })
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,426 @@
+﻿using Elasticsearch.Net;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Amy.App
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            #region 初始化客户端
+            var node = new Uri("http://localhost:9200");
+
+            var pool = new SniffingConnectionPool(new[] { node });
+
+            var config = new ConnectionConfiguration(pool).DisableDirectStreaming();
+
+            var client = new ElasticLowLevelClient(config);
+            #endregion
+
+            #region 索引操作
+            //1、判断索引是否存在
+            //var result = client.IndicesExists<Article>("db_test");
+
+            //switch (result.HttpStatusCode)
+            //{
+            //    case 200:
+            //        Console.WriteLine("索引已存在！！！");
+            //        break;
+            //    case 404:
+            //        Console.WriteLine("索引不存在！！！");
+            //        break;
+            //    default:
+            //        Console.WriteLine("不知明异常发生，请联系HGL！！！");
+            //        break;
+            //}
+
+            //2、类型是否存在
+            //var result = client.IndicesExistsType<Article>("db_test", "test");
+
+            //switch (result.HttpStatusCode)
+            //{
+            //    case 200:
+            //        Console.WriteLine("指定索引类型存在！！！");
+            //        break;
+            //    case 404:
+            //        Console.WriteLine("指定索引类型不存在！！！");
+            //        break;
+            //    default:
+            //        Console.WriteLine("不知明异常发生，请联系HGL！！！");
+            //        break;
+            //}
+
+            //3、创建索引
+            //var data = new { settings = new { index = new { number_of_shards = 5, number_of_replicas = 1 } } };
+
+            //var result = client.IndicesCreate<Article>("db_test", data);
+
+            //switch (result.HttpStatusCode)
+            //{
+            //    case 200:
+            //        Console.WriteLine("索引创建成功！！！");
+            //        break;
+            //    case 400:
+            //        Console.WriteLine("索引创建失败！！！");
+            //        break;
+            //    default:
+            //        Console.WriteLine("不知明异常发生，请联系HGL！！！");
+            //        break;
+            //}
+
+            //4、更新setting
+            //var data = new { index = new {  number_of_replicas = 1 } };
+
+            //var result = client.IndicesPutSettings<Article>("db_test", data);
+
+            //switch (result.HttpStatusCode)
+            //{
+            //    case 200:
+            //        Console.WriteLine("更新setting成功！！！");
+            //        break;
+            //    case 404:
+            //        Console.WriteLine("索引不存在！！！");
+            //        break;
+            //    default:
+            //        Console.WriteLine("不知明异常发生，请联系HGL！！！");
+            //        break;
+            //}
+
+            //5、删除索引
+            //var result = client.IndicesDelete<Article>("db_test");
+
+            //switch (result.HttpStatusCode)
+            //{
+            //    case 200:
+            //        Console.WriteLine("索引删除成功！！！");
+            //        break;
+            //    case 404:
+            //        Console.WriteLine("索引不存在！！！");
+            //        break;
+            //    default:
+            //        Console.WriteLine("不知明异常发生，请联系HGL！！！");
+            //        break;
+            //}
+
+            //6、开启/关闭索引
+            //var result = client.IndicesClose<Article>("db_test");//client.IndicesOpen<Article>("db_test");
+
+            //switch (result.HttpStatusCode)
+            //{
+            //    case 200:
+            //        Console.WriteLine("索引开启/关闭成功！！！");
+            //        break;
+            //    case 404:
+            //        Console.WriteLine("索引不存在！！！");
+            //        break;
+            //    default:
+            //        Console.WriteLine("不知明异常发生，请联系HGL！！！");
+            //        break;
+            //}
+
+            //7、获取索引
+            //var result = client.IndicesGet<Article>("db_test");
+
+            //switch (result.HttpStatusCode)
+            //{
+            //    case 200:
+            //        Console.WriteLine(result.ResponseBodyInBytes.ToString2());
+            //        break;
+            //    case 404:
+            //        Console.WriteLine("索引不存在！！！");
+            //        break;
+            //    default:
+            //        Console.WriteLine("不知明异常发生，请联系HGL！！！");
+            //        break;
+            //}
+            #endregion
+
+            #region Mapping操作
+            //1、创建Mapping
+            //var data = new
+            //{
+            //    properties = new
+            //    {
+            //        Id = new { type = "string", index = "not_analyzed" },
+            //        Title = new { type = "string", analyzer = "standard" },
+            //        Category = new { type = "string", index = "not_analyzed" },
+            //        Tags = new { type = "string", index = "not_analyzed" },
+            //        DateTime = new { type = "date" }
+            //    }
+            //};
+
+            //var result = client.IndicesPutMapping<Article>("db_test", "test", data);
+
+            //switch (result.HttpStatusCode)
+            //{
+            //    case 200:
+            //        Console.WriteLine("Mapping创建成功！！！");
+            //        break;
+            //    default:
+            //        Console.WriteLine("不知明异常发生，请联系HGL！！！");
+            //        break;
+            //}
+
+            //2、获取Mapping
+            //var result = client.IndicesGetMapping<Article>("db_test");
+
+            //switch (result.HttpStatusCode)
+            //{
+            //    case 200:
+            //        Console.WriteLine(result.ResponseBodyInBytes.ToString2());
+            //        break;
+            //    case 404:
+            //        Console.WriteLine("索引不存在！！！");
+            //        break;
+            //    default:
+            //        Console.WriteLine("不知明异常发生，请联系HGL！！！");
+            //        break;
+            //}
+            #endregion
+
+            #region Document操作
+            //1、添加/更新文档
+            //var model = new Article()
+            //{
+            //    Id = IDHelper.Id32,
+            //    Title = "测试标题2",
+            //    Category = "娱乐新闻",
+            //    Tags = new List<string>(),
+            //    DateTime = DateTime.Now
+            //};
+
+            ////AddQueryString给文档_id赋值，null则会被随机指定值
+            //var result = client.Index<Article>("db_test", "test", model, x => x.AddQueryString("id", model.Id));
+
+            //switch (result.HttpStatusCode)
+            //{
+            //    case 200:
+            //        Console.WriteLine("文档修改成功！！！");
+            //        break;
+            //    case 201:
+            //        Console.WriteLine("文档添加成功！！！");
+            //        break;
+            //    default:
+            //        Console.WriteLine("不知明异常发生，请联系HGL！！！");
+            //        break;
+            //}
+
+            //2、获取文档
+            //var result = client.Get<Article>("db_test", "test", "7512efa8def745de8157f38898e698cf");
+
+            //if (result.HttpStatusCode == 200)
+            //{
+            //    var dataStr = result.ResponseBodyInBytes.ToString2().GetJsonValue("_source");
+
+            //    Console.WriteLine(dataStr);
+            //}
+
+            //3、删除文档
+            //var result = client.Delete<Article>("db_test", "test", "7512efa8def745de8157f38898e698cf");
+
+            //switch (result.HttpStatusCode)
+            //{
+            //    case 200:
+            //        Console.WriteLine("文档删除成功！！！");
+            //        break;
+            //    case 404:
+            //        Console.WriteLine("文档不存在！！！");
+            //        break;
+            //    default:
+            //        Console.WriteLine("不知明异常发生，请联系HGL！！！");
+            //        break;
+            //}
+
+            //4、局部更新文档
+            //var data = new { doc = new { Title = "测试新闻2" } };
+
+            //var result = client.Update<Article>("db_test", "test", "7e4300cd776e4872836e476994016fb3", data);
+
+            //switch (result.HttpStatusCode)
+            //{
+            //    case 200:
+            //        Console.WriteLine("文档更新成功！！！");
+            //        break;
+            //    case 404:
+            //        Console.WriteLine("文档不存在！！！");
+            //        break;
+            //    default:
+            //        Console.WriteLine("不知明异常发生，请联系HGL！！！");
+            //        break;
+            //}
+
+            //5、局部追加文档
+            //var data = "{\"script\":{\"inline\":\"ctx._source.Tags += tag\",\"params\":{\"tag\":\"blue\"}}}";
+
+            //var result = client.Update<Article>("db_test", "test", "683989956e7b4337857bd27e51dd67d3", data);
+
+            //switch (result.HttpStatusCode)
+            //{
+            //    case 200:
+            //        Console.WriteLine("文档追加成功！！！");
+            //        break;
+            //    case 404:
+            //        Console.WriteLine("文档不存在！！！");
+            //        break;
+            //    default:
+            //        Console.WriteLine("不知明异常发生，请联系HGL！！！");
+            //        break;
+            //}
+
+            //6、获取多文档
+            //var data = new { docs =new List<object>() {
+            //    new { _index="db_test", _type="test", _id= "5223c5749173447488cb671277492223" },
+            //    new { _index = "db_test", _type = "test", _id = "c4bf22200fb54848826e38a80a507671" }
+            //} };
+
+            //var result = client.Mget<Article>(data);
+
+            //if (result.HttpStatusCode == 200)
+            //{
+            //    Console.WriteLine(result.ResponseBodyInBytes.ToString2().GetJsonValue("docs"));
+            //}
+
+            //7、批量添加/更新文档
+            //var list = new List<object>();
+
+            //for (int n = 1; n < 10; n++)
+            //{
+            //    var id = IDHelper.Id32;
+
+            //    list.Add(new
+            //    {
+            //        index = new { _index = "db_test", _type = "test", _id = id }
+            //    });
+
+            //    list.Add(new Article()
+            //    {
+            //        Id = id,
+            //        Title = "批量数据测试" + n,
+            //        Category = "娱乐新闻",
+            //        Tags = new List<string>(),
+            //        DateTime = DateTime.Now
+            //    });
+            //}
+
+            //var result = client.Bulk<Article>(list);
+
+            //switch (result.HttpStatusCode)
+            //{
+            //    case 200:
+            //        Console.WriteLine("文档批量添加/更新成功！！！");
+            //        break;
+            //    default:
+            //        Console.WriteLine("不知明异常发生，请联系HGL！！！");
+            //        break;
+            //}
+
+            //8、批量删除文档
+            //var ids = new string[] { "146068c486bd47e39d168c3819f2d85a", "5223c5749173447488cb671277492223" };
+
+            //var list = new List<object>();
+
+            //foreach (var v in ids)
+            //{
+            //    list.Add(new
+            //    {
+            //        delete = new { _index = "db_test", _type = "test", _id = v }
+            //    });
+            //}
+
+            //var result = client.Bulk<Article>(list);
+
+            //switch (result.HttpStatusCode)
+            //{
+            //    case 200:
+            //        Console.WriteLine("文档批量删除成功！！！");
+            //        break;
+            //    default:
+            //        Console.WriteLine("不知明异常发生，请联系HGL！！！");
+            //        break;
+            //}
+
+            //8、批量局部更新文档
+            //var ids = new string[] { "683989956e7b4337857bd27e51dd67d3", "1475a4f99ad947b3a5be60edb78df80c" };
+
+            //var list = new List<object>();
+
+            //foreach (var v in ids)
+            //{
+            //    list.Add(new
+            //    {
+            //        update = new { _index = "db_test", _type = "test", _id = v }
+            //    });
+
+            //    list.Add(new { doc = new { Title = "局部更新后的标题！！！" } });
+            //}
+
+            //var result = client.Bulk<Article>(list);
+
+            //switch (result.HttpStatusCode)
+            //{
+            //    case 200:
+            //        Console.WriteLine("文档批量局部更新成功！！！");
+            //        break;
+            //    default:
+            //        Console.WriteLine("不知明异常发生，请联系HGL！！！");
+            //        break;
+            //}
+            #endregion
+
+            #region Document检索
+            var data = new
+            {
+                query = new
+                {
+                    @bool = new
+                    {
+                        must = new List<object>() {
+                            new { query_string = new { default_field = "Title", query="这内容创业的盛世" } }
+                        },
+                        must_not = new List<object>() {
+                            new { query_string = new { default_field = "Description", query="条的" } }
+                        },
+                        //should= new List<object>() {
+                        //    new { query_string = new { default_field = "Title", query="郭德纲" } }
+                        //},
+                        //filter= new List<object>() {
+                        //    new { query_string = new { default_field = "Title", query="郭德纲" } }
+                        //}
+                    }
+                },
+                sort = new List<object>()
+                {
+                    new { Tips = new { order = "desc" } },
+                    new { DateTime = new { order = "desc" } },
+                    new { _score = new { order = "desc" } },
+                },
+                from = 0,
+                size = 2,
+            };
+
+            var result = client.Search<Article>("db_test", data);
+
+            var response = result.ResponseBodyInBytes.ByteToString().GetJsonValue("hits");
+
+            Console.WriteLine(response);
+            #endregion
+        }
+    }
+
+    public class Article
+    {
+        public string Id { get; set; }
+
+        public string Title { get; set; }
+
+        public string Category { get; set; }
+
+        public List<string> Tags { get; set; }
+
+        public DateTime DateTime { get; set; }
+    }
+}

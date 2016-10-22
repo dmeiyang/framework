@@ -1,0 +1,73 @@
+﻿@{
+    ViewBag.Title = "图片存储服务（七牛）";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<!-- 面包屑 start -->
+<div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
+    <ol class="breadcrumb page-breadcrumb pull-left">
+        <li><i class="fa fa-home"></i>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/admin/manager">工作台</a>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+        <li><a href="javascript:void(0);">对象存储服务</a>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+        <li class="active">@ViewBag.Title</li>
+    </ol>
+    <div class="clearfix"></div>
+</div>
+<!-- 面包屑 end -->
+
+<!-- 右侧内容 start -->
+<div class="page-content">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-yellow">
+                <div class="panel-heading">图片上传</div>
+                <div class="panel-body pan">
+                    <form id="amy-form" class="form-horizontal" method="post" enctype="multipart/form-data" action="@Url.Action("PutByQiniu", "OBS", new { area = "Admin" })">
+                        <div class="form-body pal">
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">文件名称：</label>
+                                <div class="col-md-8">
+                                    <input type="text" id="id" name="Id" placeholder="文件名称" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">图片上传：</label>
+                                <div class="col-md-8">
+                                    <input name="PicName" type="file" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-actions pal">
+                            <div class="form-group mbn">
+                                <div class="col-md-offset-2 col-md-6">
+                                    <a href="javascript:history.back(-1)" class="btn btn-default">返回</a>&nbsp;&nbsp;
+
+                                    <button class="btn btn-primary" type="submit">保存</button>
+
+                                    <a href="javascript:void(0);" class="btn btn-primary js-del">删除</a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 右侧内容 end -->
+
+@section scripts{
+    <script type="text/javascript">
+        $(function () {
+            $('.js-del').on('click', function () {
+                $.post('@Url.Action("DelByQiniu", "OBS", new { area = "Admin" })', { id: $('#id').val() }, function (res) {
+                    if (res.Flag) {
+                        amy.alert(res.Content);
+                    }
+                    else {
+                        amy.alert(res.Content[0][1]);
+                    }
+                })
+            })
+        })
+    </script>
+}
