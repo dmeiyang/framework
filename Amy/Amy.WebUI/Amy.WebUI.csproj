@@ -178,9 +178,11 @@
     <Compile Include="Areas\Admin\Controllers\RedisController.cs" />
     <Compile Include="Areas\Admin\Models\Article.cs" />
     <Compile Include="Areas\Admin\Models\BusinessExample.cs" />
+    <Compile Include="Areas\Admin\Models\CacheObject.cs" />
     <Compile Include="Areas\Admin\Models\Comment.cs" />
     <Compile Include="Areas\Admin\Models\ArticleCondition.cs" />
     <Compile Include="Areas\Admin\Models\SearchResult.cs" />
+    <Compile Include="Areas\Admin\Models\SiteConfig.cs" />
     <Compile Include="Areas\Demo\Controllers\FormsController.cs" />
     <Compile Include="Areas\Demo\Controllers\ManagerController.cs" />
     <Compile Include="Areas\Demo\Controllers\UIAdvancedController.cs" />
@@ -819,7 +821,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin\Views\Redis\" />
     <Folder Include="Areas\Demo\Models\" />
     <Folder Include="Content\mgr\vendors\jquery-ui-1.10.3.custom\css\ui-lightness\" />
     <Folder Include="Content\mgr\vendors\ueditor\net\upload\image\20160118\" />
@@ -876,6 +877,8 @@
     <Content Include="Areas\Admin\Views\Elasticsearch\Add.cshtml" />
     <Content Include="Areas\Admin\Views\Business\商品秒杀.cshtml" />
     <Content Include="Areas\Admin\Views\Business\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Redis\Basic.cshtml" />
+    <Content Include="Areas\Admin\Views\Redis\Add.cshtml" />
     <None Include="Project_Readme.html" />
     <Content Include="Views\Home\Index.cshtml" />
     <None Include="Properties\PublishProfiles\webui.pubxml" />

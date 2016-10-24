@@ -34,11 +34,23 @@ namespace Amy.Runtime.Caching.Redis
         /// 获取所有缓存key值集合
         /// </summary>
         /// <returns>key值集合</returns>
-        public List<string> GetAll()
+        public IEnumerable<string> GetAll()
         {
             using (var client = prcm.GetReadOnlyClient())
             {
                 return client.GetAllKeys();
+            }
+        }
+
+        /// <summary>
+        /// 持久化到硬盘
+        /// </summary>
+        /// <returns>true，持久化成功；false，持久化失败</returns>
+        public void SaveAsync()
+        {
+            using (var client = prcm.GetClient())
+            {
+                client.SaveAsync();
             }
         }
 
@@ -51,21 +63,6 @@ namespace Amy.Runtime.Caching.Redis
             using (var client = prcm.GetClient())
             {
                 client.FlushAll();
-
-                return true;
-            }
-        }
-
-        /// <summary>
-        /// 批量设置缓存
-        /// </summary>
-        /// <param name="dic">缓存集合</param>
-        /// <returns>true，设置成功；false，设置失败</returns>
-        public bool BulkSet<T>(Dictionary<string, T> dic)
-        {
-            using (var client = prcm.GetClient())
-            {
-                client.SetAll(dic);
 
                 return true;
             }
@@ -123,11 +120,11 @@ namespace Amy.Runtime.Caching.Redis
         /// <param name="value">缓存内容</param>
         /// <param name="expireTime">过期时间</param>
         /// <returns>true，设置成功；false，设置失败</returns>
-        public bool Set<T>(string key, T value, TimeSpan? expireTime = null)
+        public bool Set<T>(string key, T value, DateTime? expireTime = null)
         {
             using (var client = prcm.GetClient())
             {
-                return client.Set<T>(key, value, expireTime == null ? this.DefaultExpireTime : (TimeSpan)expireTime);
+                return client.Set<T>(key, value, expireTime == null ? DateTime.Now.Add(this.DefaultExpireTime) : (DateTime)expireTime);
             }
         }
 

@@ -9,7 +9,7 @@ using ServiceStack.Redis.Generic;
 
 namespace Amy.Runtime.Caching.Redis
 {
-    public class RedisListCache<T> : Amy.Runtime.Caching.IListCache<T> where T : class
+    public class RedisListCache : Amy.Runtime.Caching.IListCache
     {
         private static Configuration.Config config = (Configuration.Config)System.Configuration.ConfigurationManager.GetSection("RedisConfig");
 
@@ -34,7 +34,7 @@ namespace Amy.Runtime.Caching.Redis
         /// </summary>
         /// <param name="key">键值</param>
         /// <returns>缓存内容</returns>
-        public IEnumerable<T> GetList(string key)
+        public IEnumerable<T> GetList<T>(string key)
         {
             using (var client = prcm.GetReadOnlyClient())
             {
@@ -51,7 +51,7 @@ namespace Amy.Runtime.Caching.Redis
         /// <param name="page">page</param>
         /// <param name="size">size</param>
         /// <returns>缓存内容</returns>
-        public PageList<T> GetList(string key, int page, int size)
+        public PageList<T> GetList<T>(string key, int page, int size)
         {
             using (var client = prcm.GetReadOnlyClient())
             {
@@ -66,7 +66,7 @@ namespace Amy.Runtime.Caching.Redis
         /// </summary>
         /// <param name="key">键值</param>
         /// <returns>缓存总数</returns>
-        public long GetCountOfList(string key)
+        public long GetCountOfList<T>(string key)
         {
             using (var client = prcm.GetReadOnlyClient())
             {
@@ -82,7 +82,7 @@ namespace Amy.Runtime.Caching.Redis
         /// <param name="key">键值</param>
         /// <param name="id">item对象id</param>
         /// <returns>item对象</returns>
-        public T GetItemFromList(string key, string id)
+        public T GetItemFromList<T>(string key, string id)
         {
             using (var client = prcm.GetClient())
             {
@@ -111,7 +111,7 @@ namespace Amy.Runtime.Caching.Redis
         /// <param name="key">键值</param>
         /// <param name="value">item对象</param>
         /// <returns>true，设置成功；false，设置失败</returns>
-        public bool AddItemToList(string key, T value)
+        public bool AddItemToList<T>(string key, T value)
         {
             using (var client = prcm.GetClient())
             {
@@ -148,7 +148,7 @@ namespace Amy.Runtime.Caching.Redis
         /// <param name="key">键值</param>
         /// <param name="value">item对象</param>
         /// <returns>true，压入成功；false，压入失败</returns>
-        public bool PushItemToList(string key, T value)
+        public bool PushItemToList<T>(string key, T value)
         {
             using (var client = prcm.GetClient())
             {
@@ -184,7 +184,7 @@ namespace Amy.Runtime.Caching.Redis
         /// </summary>
         /// <param name="key">键值</param>
         /// <returns>item对象</returns>
-        public T PopItemFromList(string key)
+        public T PopItemFromList<T>(string key)
         {
             using (var client = prcm.GetClient())
             {
@@ -202,7 +202,7 @@ namespace Amy.Runtime.Caching.Redis
         /// <param name="key">键值</param>
         /// <param name="value">item对象</param>
         /// <returns>true，压入成功；false，压入失败</returns>
-        public bool PrependItemToList(string key, T value)
+        public bool PrependItemToList<T>(string key, T value)
         {
             using (var client = prcm.GetClient())
             {
@@ -238,7 +238,7 @@ namespace Amy.Runtime.Caching.Redis
         /// </summary>
         /// <param name="key">键值</param>
         /// <returns>item对象</returns>
-        public T DequeueItemFromList(string key)
+        public T DequeueItemFromList<T>(string key)
         {
             using (var client = prcm.GetClient())
             {
@@ -256,7 +256,7 @@ namespace Amy.Runtime.Caching.Redis
         /// <param name="key">键值</param>
         /// <param name="expireTime">到期时间</param>
         /// <returns>true，设置成功；false，设置失败</returns>
-        public bool ExpireEntryAt(string key, DateTime expireTime)
+        public bool ExpireEntryAt<T>(string key, DateTime expireTime)
         {
             using (var client = prcm.GetClient())
             {
@@ -272,7 +272,7 @@ namespace Amy.Runtime.Caching.Redis
         /// <param name="key">键值</param>
         /// <param name="id">缓存对象Id</param>
         /// <returns>true，移除成功；false，移除失败</returns>
-        public bool RemoveItemFromList(string key, string id)
+        public bool RemoveItemFromList<T>(string key, string id)
         {
             using (var client = prcm.GetClient())
             {
@@ -306,7 +306,7 @@ namespace Amy.Runtime.Caching.Redis
         /// </summary>
         /// <param name="key">键值</param>
         /// <returns>true，移除成功；false，移除失败</returns>
-        public bool RemoveAllFromList(string key)
+        public bool RemoveAllFromList<T>(string key)
         {
             using (var client = prcm.GetClient())
             {

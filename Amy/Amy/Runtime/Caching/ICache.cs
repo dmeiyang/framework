@@ -18,20 +18,19 @@ namespace Amy.Runtime.Caching
         /// 获取所有缓存key值集合
         /// </summary>
         /// <returns>key值集合</returns>
-        List<string> GetAll();
+        IEnumerable<string> GetAll();
+
+        /// <summary>
+        /// 持久化到硬盘
+        /// </summary>
+        /// <returns>true，持久化成功；false，持久化失败</returns>
+        void SaveAsync();
 
         /// <summary>
         /// 移除所有缓存
         /// </summary>
         /// <returns>true，移除成功；false，移除失败</returns>
         bool FlushAll();
-
-        /// <summary>
-        /// 批量设置缓存
-        /// </summary>
-        /// <param name="dic">缓存集合</param>
-        /// <returns>true，设置成功；false，设置失败</returns>
-        bool BulkSet<T>(Dictionary<string, T> dic);
 
         /// <summary>
         /// 批量设置缓存
@@ -63,7 +62,7 @@ namespace Amy.Runtime.Caching
         /// <param name="value">缓存内容</param>
         /// <param name="expireTime">过期时间</param>
         /// <returns>true，设置成功；false，设置失败</returns>
-        bool Set<T>(string key, T value, TimeSpan? expireTime = null);
+        bool Set<T>(string key, T value, DateTime? expireTime = null);
 
         /// <summary>
         /// 移除缓存
