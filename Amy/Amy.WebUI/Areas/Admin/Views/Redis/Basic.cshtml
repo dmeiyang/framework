@@ -27,8 +27,8 @@
                                 <div class="text-filter-box">
                                     <a href="javascript:void(0);" class="btn btn-green js-add"><i class="fa fa-plus"></i>&nbsp;添加缓存</a>
                                     <a href="javascript:void(0);" class="btn btn-primary js-bulkDel"><i class="fa fa-minus"></i>&nbsp;删除缓存</a>
-                                    <a href="javascript:void(0);" class="btn btn-green js-persist"><i class="fa fa-plus"></i>&nbsp;持久化所有缓存</a>
-                                    <a href="javascript:void(0);" class="btn btn-primary js-clear"><i class="fa fa-minus"></i>&nbsp;清空所有缓存</a>
+                                    <a href="javascript:void(0);" class="btn btn-green js-backup"><i class="fa fa-plus"></i>&nbsp;备份缓存库</a>
+                                    <a href="javascript:void(0);" class="btn btn-primary js-flush"><i class="fa fa-minus"></i>&nbsp;清空缓存库</a>
                                 </div>
                             </div>
                             <div style="float: right;">
@@ -132,10 +132,10 @@
             $('.js-del').on('click', function () {
                 var id = $(this).parents('tr').attr('data-id');
 
-                amy.confirm('确定要删除所选文档吗？', function () {
-                    $.post('@Url.Action("Delete", "Elasticsearch", new { area = "Admin" })', { ids: id }, function (res) {
+                amy.confirm('确定要删除所选缓存吗？', function () {
+                    $.post('@Url.Action("Delete", "Redis", new { area = "Admin" })', { ids: id }, function (res) {
                         if (res.Flag) {
-                            amy.alert('删除文档成功！！！', function () {
+                            amy.alert('删除缓存成功！！！', function () {
                                 location.reload();
                             })
                         }
@@ -150,7 +150,7 @@
             $('.js-bulkDel').on('click', function () {
                 var obj = $(this);
 
-                amy.confirm('确定要删除所选文档吗？', function () {
+                amy.confirm('确定要删除所选缓存吗？', function () {
                     var ids = [];
 
                     $(".icheckbox_minimal-grey").each(function () {
@@ -164,9 +164,9 @@
                         }
                     });
 
-                    $.post('@Url.Action("Delete", "Elasticsearch", new { area = "Admin" })', { ids: ids.join(',') }, function (res) {
+                    $.post('@Url.Action("Delete", "Redis", new { area = "Admin" })', { ids: ids.join(',') }, function (res) {
                         if (res.Flag) {
-                            amy.alert('删除文档成功！！！', function () {
+                            amy.alert('删除缓存成功！！！', function () {
                                 location.reload();
                             })
                         }
@@ -178,11 +178,27 @@
                 })
             })
 
-            $('.js-persist').on('click', function () {
-                amy.confirm('确定要持久化所有缓存吗？', function () {
-                    $.post('@Url.Action("Persist", "Redis", new { area = "Admin" })', {  }, function (res) {
+            $('.js-backup').on('click', function () {
+                amy.confirm('确定要备份缓存库吗？', function () {
+                    $.post('@Url.Action("Backup", "Redis", new { area = "Admin" })', {  }, function (res) {
                         if (res.Flag) {
-                            amy.alert('持久化缓存成功！！！', function () {
+                            amy.alert('备份缓存库成功！！！', function () {
+                                location.reload();
+                            })
+                        }
+                        else {
+                            amy.alert(res.Content[0][1]);
+                        }
+
+                    }, 'json')
+                })
+            })
+
+            $('.js-flush').on('click', function () {
+                amy.confirm('确定要清除备份库吗？', function () {
+                    $.post('@Url.Action("Flush", "Redis", new { area = "Admin" })', {}, function (res) {
+                        if (res.Flag) {
+                            amy.alert('清除备份库成功！！！', function () {
                                 location.reload();
                             })
                         }

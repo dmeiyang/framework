@@ -133,37 +133,26 @@ namespace Amy.WebUI.Areas.Admin.Controllers
             return JRCommonHandleResult(result);
         }
 
-        public ActionResult Persist()
+        public ActionResult Backup()
         {
             client.SaveAsync();
 
             return JRCommonHandleResult(true);
         }
 
-        public void Index()
+        public ActionResult Flush()
         {
-            Amy.Runtime.Caching.ICache redis = new Amy.Runtime.Caching.Redis.RedisCache();
+            client.FlushAll();
 
-            redis.FlushAll();
+            return JRCommonHandleResult(true);
+        }
 
-            //Amy.Runtime.Caching.IListCache<Test> redisList = new Amy.Runtime.Caching.Redis.RedisListCache<Test>();
+        public ActionResult Delete(string ids)
+        {
+            if (string.IsNullOrEmpty(ids))
+                return JRFaild("删除失败，请选择要删除的缓存项！！！");
 
-            //redisList.PrependItemToList("test", new Test() { Id = "001", Name = "成龙", Age = 18 });
-            //redisList.PrependItemToList("test", new Test() { Id = "002", Name = "刘德华", Age = 18 });
-            //redisList.PrependItemToList("test", new Test() { Id = "003", Name = "胡歌", Age = 19 });
-
-            //var temp = redisList.DequeueItemFromList("test");
-
-            //Response.Write(temp.ToJsonByJsonNet());
-            //Response.Write("<hr/>");
-
-            //var list = redisList.GetList("test");
-
-            //foreach (var v in list)
-            //{
-            //    Response.Write(v.ToJsonByJsonNet());
-            //    Response.Write("<hr/>");
-            //}
+            return JRCommonHandleResult(client.BulkRemove(ids.ToSplit(',')));
         }
     }
 }
