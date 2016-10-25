@@ -789,6 +789,13 @@
     <Content Include="Content\mgr\vendors\ueditor\ueditor.config.js" />
     <Content Include="Content\mgr\vendors\ueditor\ueditor.parse.js" />
     <Content Include="Content\mgr\vendors\ueditor\ueditor.parse.min.js" />
+    <Content Include="Content\mgr\vendors\webuploader\amy.webuploader.js" />
+    <Content Include="Content\mgr\vendors\webuploader\webupload.mult.js" />
+    <Content Include="Content\mgr\vendors\webuploader\images\bg.png" />
+    <Content Include="Content\mgr\vendors\webuploader\images\icons.png" />
+    <Content Include="Content\mgr\vendors\webuploader\images\progress.png" />
+    <Content Include="Content\mgr\vendors\webuploader\images\success.png" />
+    <Content Include="Content\mgr\vendors\webuploader\images\image.png" />
     <Content Include="Content\mgr\vendors\webuploader\Uploader.swf" />
     <Content Include="Content\mgr\vendors\webuploader\webuploader.css" />
     <Content Include="Content\mgr\vendors\webuploader\webuploader.custom.js" />
@@ -899,6 +906,7 @@
     <Content Include="Areas\Admin\Views\Redis\Basic.cshtml" />
     <Content Include="Areas\Admin\Views\Redis\Add.cshtml" />
     <Content Include="Areas\Admin\Views\Plugin\WebUploader.cshtml" />
+    <None Include="Areas\Admin\Views\Plugin\WebUploader.cshtml.bak" />
     <None Include="Project_Readme.html" />
     <Content Include="Views\Home\Index.cshtml" />
     <None Include="Properties\PublishProfiles\webui.pubxml" />

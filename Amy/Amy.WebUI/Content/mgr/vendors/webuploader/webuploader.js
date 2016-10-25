@@ -729,8 +729,8 @@
          *     chunked: true
          * });
          */
-        function Uploader( opts ) {
-            this.options = $.extend( true, {}, Uploader.options, opts );
+        function Uploader(opts) {
+            this.options = $.extend(true, {}, Uploader.options, opts);
             this._init( this.options );
         }
     
@@ -4333,7 +4333,7 @@
     
                 // 已经重复了
                 if ( mapping[ hash ] ) {
-                    this.trigger( 'error', 'F_DUPLICATE', file );
+                    this.trigger( 'error', '该文件已经在上传队列中...', file );
                     return false;
                 }
             });
