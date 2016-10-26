@@ -1,7 +1,34 @@
 ﻿(function ($) {
     $.extend($.fn, {
-        webuploader: function () {
+        multuploader: function (opt) {
             var container = this;
+
+            var option = {
+                pick: {
+                    id: container.find('.filepicker'),//'#filePicker',
+                    label: '点击选择图片'
+                },
+                dnd: container.find('.queueList'),//'#uploader .queueList',
+                paste: document.body,
+
+                accept: {
+                    title: 'Images',
+                    extensions: 'gif,jpg,jpeg,bmp,png',
+                    mimeTypes: 'image/*'
+                },
+
+                // swf文件路径
+                swf: '/content/mgr/vendors/webuploader/Uploader.swf',
+                server: '/admin/plugin/uploadsliverfile',
+                disableGlobalDnd: true,
+
+                chunked: true,
+                fileNumLimit: 300,
+                fileSizeLimit: 5 * 1024 * 1024,    // 200 M
+                fileSingleSizeLimit: 1 * 1024 * 1024    // 50 M
+            };
+
+            option = $.extend(option, opt);
 
             // 图片容器
             var queue = $('<ul class="filelist"></ul>').appendTo(container.find('.queueList'));
@@ -57,31 +84,7 @@
             }
 
             // 实例化
-            var uploader = WebUploader.create({
-                pick: {
-                    id: container.find('.filepicker'),//'#filePicker',
-                    label: '点击选择图片'
-                },
-                dnd: container.find('.queueList'),//'#uploader .queueList',
-                paste: document.body,
-
-                accept: {
-                    title: 'Images',
-                    extensions: 'gif,jpg,jpeg,bmp,png',
-                    mimeTypes: 'image/*'
-                },
-
-                // swf文件路径
-                swf: '/content/mgr/vendors/webuploader/Uploader.swf',
-
-                disableGlobalDnd: true,
-
-                chunked: true,
-                server: '/admin/plugin/uploadsliverfile',
-                fileNumLimit: 300,
-                fileSizeLimit: 5 * 1024 * 1024,    // 200 M
-                fileSingleSizeLimit: 1 * 1024 * 1024    // 50 M
-            });
+            var uploader = WebUploader.create(option);
 
             // 添加“添加文件”的按钮
             uploader.addButton({
@@ -431,8 +434,82 @@
             btn_upload.addClass('state-' + state);
 
             updateTotalProgress();
+        },
+
+        sliveruploader: function (opt, success) {
+
+            var container = this;
+
+            var GUID = WebUploader.Base.guid();//一个GUID
+
+            var option = {
+                swf: '/content/mgr/vendors/webuploader/Uploader.swf',
+                server: '/admin/plugin/uploadsliverfile',
+
+                //指定选择文件的按钮容器，可指定按钮名称innerHTML，是否可多文件上传multiple等
+                pick: {
+                    id: container.find('.js-picker'),
+                    multiple: false
+                },
+                //指定接受哪些类型的文件，由于目前还有ext转mimeType表，所以这里需要分开指定
+                accept: {
+                    title: 'Images',
+                    extensions: 'gif,jpg,jpeg,bmp,png',
+                    mimeTypes: 'image/*'
+                },
+                resize: false,
+                chunked: true,//开始分片上传
+                chunkSize: 2048000,//每一片的大小
+                formData: {
+                    guid: GUID //自定义参数，待会儿解释
+                }
+            };
+
+            option = $.extend(option, opt);
+
+            var uploader = new WebUploader.Uploader(option);
+
+            uploader.on('fileQueued', function (file) {
+                container.find('.filename').html("文件名：" + file.name);
+                container.find(".state").html('等待上传');
+                container.find(".progress-bar").width('0%');
+                container.find(".progress-bar").text('0%');
+                container.find('js-uploader').removeAttr('disabled');
+            });
+
+            uploader.on('uploadProgress', function (file, percentage) {
+                container.find(".progress-bar").width(percentage * 100 + '%');
+                container.find(".progress-bar").text(parseInt(percentage * 100) + '%');
+            });
+
+            uploader.on('uploadSuccess', function (file) {
+                $.post(option.mergeserver || '/admin/plugin/mergesliverfile', { guid: GUID, fileName: file.name }, function (data) {
+                    container.find(".progress-bar").removeClass('progress-bar-striped').removeClass('active').removeClass('progress-bar-info').addClass('progress-bar-success');
+                    container.find(".state").html("上传成功...");
+                    success(data);
+                });
+            });
+
+            uploader.on('uploadError', function () {
+                container.find(".progress-bar").removeClass('progress-bar-striped').removeClass('active').removeClass('progress-bar-info').addClass('progress-bar-danger');
+                container.find(".state").html("上传失败...");
+            });
+
+            container.find(".js-uploader").click(function () {
+                uploader.upload();
+                container.find(".js-uploader").text("上传");
+                container.find('.js-uploader').attr('disabled', 'disabled');
+                container.find(".progress-bar").addClass('progress-bar-striped').addClass('active');
+                container.find(".state").html("上传中...");
+            });
+
+            container.find(".js-pause").click(function () {
+                uploader.stop(true);
+                container.find('.js-uploader').removeAttr('disabled');
+                container.find(".js-uploader").text("继续上传");
+                container.find(".state").html("暂停中...");
+                container.find(".progress-bar").removeClass('progress-bar-striped').removeClass('active');
+            });
         }
-
-
     });
 }(jQuery));

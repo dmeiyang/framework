@@ -14,7 +14,6 @@
     <div class="clearfix"></div>
 </div>
 <!-- 面包屑 end -->
-
 <!-- 右侧内容 start -->
 <div class="page-content">
     <div class="row">
@@ -26,7 +25,7 @@
         </div>
 
         <div class="col-lg-12">
-            <div id="uploader" class="wu-example">
+            <div id="uploader" class="wu-example amy-webuploader">
                 <div class="queueList">
                     <div class="placeholder dndarea">
                         <div class="filepicker"></div>
@@ -43,6 +42,46 @@
                     </div>
                 </div>
             </div>
+        </div>
+
+        <div class="col-lg-12">
+            <div class="panel panel-yellow">
+                <div class="panel-heading">大文件分片上传示例</div>
+                <div class="panel-body pan">
+                    <form id="amy-form" action="@Url.Action("Save", "Forms", new { area="Demo" })" method="post" class="form-horizontal">
+                        <div class="form-body pal">
+                            <div class="form-group">
+                                <label for="code" class="col-md-3 control-label">用户文档：</label>
+                                <div class="col-md-6">
+                                    <input id="Pictrue" name="Picture" type="hidden" />
+                                    <div id="silveruploader" class="wu-example amy-webuploader">
+                                        <!--用来存放文件信息-->
+                                        <div class="filename"></div>
+                                        <div class="state"></div>
+                                        <div class="progress">
+                                            <div class="progress-bar progress-bar-info progress-bar-striped active" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 0%;min-width:2%">
+                                                0%
+                                            </div>
+                                        </div>
+                                        <div class="btns">
+                                            <div class="btn btn-green js-picker">选择文件</div>
+                                            <a class="btn btn-green js-uploader">开始上传</a>
+                                            <a class="btn btn-red js-pause">暂停上传</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <div class="col-md-offset-3 col-md-9">
+                                <a href="javascript:history.back(-1)" class="btn btn-green">返回</a>&nbsp;
+                                <button class="btn btn-primary" type="submit">保存</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
         </div>
     </div>
 </div>
@@ -74,7 +113,17 @@
             })
         });
 
-        $('#uploader').webuploader();
+        $('#uploader').multuploader({
+            server: '/admin/plugin/uploadfile'
+        });
+
+        $('#silveruploader').sliveruploader({
+            server: '/admin/plugin/uploadsliverfile',
+            mergeserver: '/admin/plugin/mergesliverfile'
+        },
+        function (data) {
+            $("#Pictrue").val(data.path);
+        });
     </script>
 }
 

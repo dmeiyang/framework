@@ -14,6 +14,13 @@ namespace Amy.WebUI.Areas.Admin.Controllers
             return View();
         }
 
+        public ActionResult UploadFile()
+        {
+            var file = Request.Files[0];
+
+            return JRCommonHandleResult(true);
+        }
+
         [HttpPost]
         public ActionResult UploadSliverFile()
         {
