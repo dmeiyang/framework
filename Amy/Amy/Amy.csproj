@@ -56,6 +56,7 @@
     <Compile Include="HGLAuthorize.cs" />
     <Compile Include="IDHelper.cs" />
     <Compile Include="Runtime\Caching\IListCache.cs" />
+    <Compile Include="Unit\ActiveDirectory\IConnection.cs" />
     <Compile Include="Unit\Elasticsearch\IConnection.cs" />
     <Compile Include="Unit\Elasticsearch\Models\SearchHits.cs" />
     <Compile Include="Unit\Elasticsearch\Models\SearchModel.cs" />
